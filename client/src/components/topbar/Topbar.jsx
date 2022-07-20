@@ -19,7 +19,7 @@ const Topbar = () => {
       <div className="topbar-right">
         <div className="topbar-links">
           <span className="topbar-link">Homepage</span>
-          <span className="topbar-link">Timeline</span>
+          <span className="topbar-link">Profile</span>
         </div>
         <div className="topbar-icons">
           <div className="topbar-icon-item">
@@ -41,7 +41,7 @@ const Topbar = () => {
             </span>
           </div>
         </div>
-        <img src="/assets/profile/1.webp" alt="" className="topbar-image" />
+        <img src="/assets/default-profile.png" alt="" className="topbar-image" />
       </div>
     </div>
   )
