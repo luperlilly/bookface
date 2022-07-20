@@ -3,6 +3,8 @@ import mongoose from 'mongoose'
 import helmet from 'helmet'
 import morgan from 'morgan'
 import 'dotenv/config'
+import userRoutes from './routes/userRoutes.js'
+import authRoutes from './routes/authRoutes.js'
 
 const app = express()
 
