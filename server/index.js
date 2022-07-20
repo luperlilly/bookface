@@ -17,8 +17,8 @@ app.use(express.json())
 app.use(helmet())
 app.use(morgan("dev")) // was getting deprecation warning due to import syntax, adding "dev" stops this
 
-app.use('/api/users', userRoutes)
 app.use('/api/auth', authRoutes)
+app.use('/api/users', userRoutes)
 app.use('/api/posts', postRoutes)
 
 const port = process.env.PORT
