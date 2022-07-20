@@ -8,6 +8,8 @@ import HelpOutlineIcon from '@mui/icons-material/HelpOutline'
 import WorkOutlineIcon from '@mui/icons-material/WorkOutline'
 import EventIcon from '@mui/icons-material/Event'
 import SchoolIcon from '@mui/icons-material/School'
+import CloseFriend from '../closeFriend/CloseFriend'
+import { Users } from "../../dummyData"
 
 const Leftbar = () => {
   return (
@@ -54,54 +56,9 @@ const Leftbar = () => {
         <button className="leftbar-button">Show more</button>
         <hr className='leftbar-hr' />
         <ul className="leftbar-friend-list">
-          <li className="leftbar-friend">
-            <img className='leftbar-friend-image' src="/assets/default-profile.png" alt="" />
-            <span className="leftbar-friend-name">Dwigt Rortugal</span>
-          </li>
-          <li className="leftbar-friend">
-            <img className='leftbar-friend-image' src="/assets/default-profile.png" alt="" />
-            <span className="leftbar-friend-name">Bobson Dugnutt</span>
-          </li>
-          <li className="leftbar-friend">
-            <img className='leftbar-friend-image' src="/assets/default-profile.png" alt="" />
-            <span className="leftbar-friend-name">Todd Bonzalez</span>
-          </li>
-          <li className="leftbar-friend">
-            <img className='leftbar-friend-image' src="/assets/default-profile.png" alt="" />
-            <span className="leftbar-friend-name">Dwigt Rortugal</span>
-          </li>
-          <li className="leftbar-friend">
-            <img className='leftbar-friend-image' src="/assets/default-profile.png" alt="" />
-            <span className="leftbar-friend-name">Bobson Dugnutt</span>
-          </li>
-          <li className="leftbar-friend">
-            <img className='leftbar-friend-image' src="/assets/default-profile.png" alt="" />
-            <span className="leftbar-friend-name">Todd Bonzalez</span>
-          </li>
-          <li className="leftbar-friend">
-            <img className='leftbar-friend-image' src="/assets/default-profile.png" alt="" />
-            <span className="leftbar-friend-name">Dwigt Rortugal</span>
-          </li>
-          <li className="leftbar-friend">
-            <img className='leftbar-friend-image' src="/assets/default-profile.png" alt="" />
-            <span className="leftbar-friend-name">Bobson Dugnutt</span>
-          </li>
-          <li className="leftbar-friend">
-            <img className='leftbar-friend-image' src="/assets/default-profile.png" alt="" />
-            <span className="leftbar-friend-name">Todd Bonzalez</span>
-          </li>
-          <li className="leftbar-friend">
-            <img className='leftbar-friend-image' src="/assets/default-profile.png" alt="" />
-            <span className="leftbar-friend-name">Dwigt Rortugal</span>
-          </li>
-          <li className="leftbar-friend">
-            <img className='leftbar-friend-image' src="/assets/default-profile.png" alt="" />
-            <span className="leftbar-friend-name">Bobson Dugnutt</span>
-          </li>
-          <li className="leftbar-friend">
-            <img className='leftbar-friend-image' src="/assets/default-profile.png" alt="" />
-            <span className="leftbar-friend-name">Todd Bonzalez</span>
-          </li>
+          {Users.map((u) => (
+              <CloseFriend key={u.id} user={u} />
+          ))}
         </ul>
       </div>
     </div>
