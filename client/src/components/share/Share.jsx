@@ -4,14 +4,16 @@ import LabelIcon from '@mui/icons-material/Label'
 import RoomIcon from '@mui/icons-material/Room'
 import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions'
 import CancelIcon from '@mui/icons-material/Cancel'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useRef, useState } from 'react'
+import { uploadImage } from '../../redux/actions/uploadAction'
 
 const Share = () => {
+  const user = useSelector((state) => state.authReducer.authData)
   const [image, setImage] = useState(null)
   const imageRef = useRef()
   const content = useRef()
-  const { user } = useSelector((state) => state.authReducer.authData)
+  const dispatch = useDispatch()
   const PF = process.env.REACT_APP_PUBLIC_FOLDER
 
   const onImageChange = (e) => {
@@ -24,7 +26,7 @@ const Share = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-
+ 
     const newPost = {
       userId: user._id,
       content: content.current.value
@@ -37,8 +39,13 @@ const Share = () => {
       data.append("file", image)
       newPost.image = fileName
       console.log(newPost)
-    }
 
+      try {
+        dispatch(uploadImage(data))
+      } catch (error) {
+        console.log(error)
+      }
+    }
   }
 
   const capitalise = (string) => {
@@ -50,7 +57,7 @@ const Share = () => {
       <div className="share-wrapper">
         <div className="share-top">
           <img className='share-profile-image' src={`${PF}default-profile.png`} alt="" />
-          <input placeholder={`What's on your mind?`} className='share-input' ref={content} required />
+          <input placeholder={`What's on your mind, ${capitalise(user.username)}?`} className='share-input' ref={content} required />
         </div>
         <hr className='share-hr' />
         <div className="share-bottom">
