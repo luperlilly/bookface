@@ -6,11 +6,13 @@ import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions'
 import CancelIcon from '@mui/icons-material/Cancel'
 
 const Share = () => {
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER
+  
   return (
     <div className="share">
       <div className="share-wrapper">
         <div className="share-top">
-          <img className='share-profile-image' src="/assets/default-profile.png" alt="" />
+          <img className='share-profile-image' src={`${PF}default-profile.png`} alt="" />
           <input placeholder='Say something...' className='share-input' />
         </div>
         <hr className='share-hr' />

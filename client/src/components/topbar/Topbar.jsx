@@ -5,6 +5,8 @@ import ChatIcon from '@mui/icons-material/Chat'
 import NotificationsIcon from '@mui/icons-material/Notifications'
 
 const Topbar = () => {
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER
+
   return (
     <div className="topbar-container">
       <div className="topbar-left">
@@ -41,7 +43,7 @@ const Topbar = () => {
             </span>
           </div>
         </div>
-        <img src="/assets/default-profile.png" alt="" className="topbar-image" />
+        <img src={`${PF}default-profile.png`} alt="" className="topbar-image" />
       </div>
     </div>
   )
