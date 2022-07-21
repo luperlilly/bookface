@@ -9,6 +9,7 @@ import 'dotenv/config'
 import userRoutes from './routes/userRoutes.js'
 import authRoutes from './routes/authRoutes.js'
 import postRoutes from './routes/postRoutes.js'
+import uploadRoute from './routes/uploadRoute.js'
 
 const app = express()
 
@@ -23,6 +24,7 @@ app.use(cors())
 app.use('/api/auth', authRoutes)
 app.use('/api/users', userRoutes)
 app.use('/api/posts', postRoutes)
+app.use('/api/upload', uploadRoute)
 
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true }, () => {
   console.log("Connected to database")
