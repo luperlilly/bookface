@@ -1,18 +1,19 @@
 import Post from '../models/Post.js'
 import User from '../models/User.js'
+import { createError } from "../error.js"
 
-export const createPost = async (req, res) => {
+export const createPost = async (req, res, next) => {
   const newPost = new Post(req.body)
 
   try {
     const savedPost = await newPost.save()
     res.status(200).json(savedPost)
   } catch (error) {
-    res.status(500).json(error)
+    next(error)
   }
 } 
 
-export const updatePost = async (req, res) => {
+export const updatePost = async (req, res, next) => {
   try {
     const post = await Post.findById(req.params.id)
 
@@ -20,14 +21,14 @@ export const updatePost = async (req, res) => {
       await post.updateOne({ $set: req.body })
       res.status(200).json("Post updated!")
     } else {
-      res.status(403).json('You can only edit your own posts')
+      return next(createError(403, "You can only edit your own posts"))
     }
   } catch (error) {
-    res.status(500).json(error)
+    next(error)
   }
 }
 
-export const deletePost = async (req, res) => {
+export const deletePost = async (req, res, next) => {
   try {
     const post = await Post.findById(req.params.id)
 
@@ -35,14 +36,14 @@ export const deletePost = async (req, res) => {
       await post.deleteOne()
       res.status(200).json("Post deleted")
     } else {
-      res.status(403).json('You can only delete your own posts')
+      return next(createError(403, "You can only delete your own posts"))
     }
   } catch (error) {
-    res.status(500).json(error)
+    next(error)
   }
 }
 
-export const likePost = async (req, res) => {
+export const likePost = async (req, res, next) => {
   try {
     const post = await Post.findById(req.params.id)
 
@@ -54,20 +55,20 @@ export const likePost = async (req, res) => {
       res.status(200).json("Post unliked")
     }   
   } catch (error) {
-    res.status(500).json(error)
+    next(error)
   }
 }
 
-export const getPost = async (req, res) => {
+export const getPost = async (req, res, next) => {
   try {
     const post = await Post.findById(req.params.id)
     res.status(200).json(post)
   } catch (error) {
-    res.status(500).json(error)
+    next(error)
   }
 }
 
-export const getTimelinePosts = async (req, res) => {
+export const getTimelinePosts = async (req, res, next) => {
   try {
     const currentUser = await User.findById(req.body.userId)
     const userPosts = await Post.find({ userId: currentUser._id })
@@ -78,6 +79,6 @@ export const getTimelinePosts = async (req, res) => {
     )
     res.json(userPosts.concat(...friendPosts))
   } catch (error) {
-    res.status(500).json(error)
+    next(error)
   }
 }

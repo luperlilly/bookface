@@ -1,7 +1,8 @@
 import User from '../models/User.js'
+import { createError } from "../error.js"
 import bcrypt from 'bcrypt'
 
-export const updateUser = async (req, res) => {
+export const updateUser = async (req, res, next) => {
   if (req.body.userId === req.params.id || req.body.isAdmin) {
     // if user tries to update password, generate a new one
     if (req.body.password) {
@@ -9,47 +10,51 @@ export const updateUser = async (req, res) => {
         const salt = await bcrypt.genSalt(10)
         req.body.password = await bcrypt.hash(req.body.password, salt)
       } catch (error) {
-        res.status(500).json(error)
+        next(error)
       }
     }
 
     try {
-      const user = await User.findByIdAndUpdate(req.params.id, {
-        $set: req.body
-      })
-      res.status(200).json('Account updated')
+      const updatedUser = await User.findByIdAndUpdate(
+        req.params.id, 
+        {
+          $set: req.body
+        },
+        { new: true }
+      )
+      res.status(200).json(updatedUser)
     } catch (error) {
-      res.status(500).json(error)
+      next(error)
     }
   } else {
-    res.status(403).json("You can only update your own account")
+    return next(createError(403, "You can update only your account!"))
   }
 }
 
-export const deleteUser = async (req, res) => {
+export const deleteUser = async (req, res, next) => {
   if (req.body.userId === req.params.id || req.body.isAdmin) {
     try {
       const user = await User.findByIdAndDelete(req.params.id)
       res.status(200).json('Account deleted')
     } catch (error) {
-      res.status(500).json(error)
+      next(error)
     }
   } else {
-    res.status(403).json("You can only delete your own account")
+    return next(createError(403, 'You can only delete your own account'))
   }
 } 
 
-export const getUser = async (req, res) => {
+export const getUser = async (req, res, next) => {
   try {
     const user = await User.findById(req.params.id)
-    const { password, updatedAt, ...others } = user._doc // remove password & updated at from returned user data
+    const { password, updatedAt, ...others } = user._doc // remove password & 'updated at' from returned user data
     res.status(200).json(others)
   } catch (error) {
-    res.status(500).json(error)
+    next(error)
   }
 }
 
-export const followUser = async (req, res) => {
+export const followUser = async (req, res, next) => {
   if (req.body.userId !== req.params.id) {
     try {
       const user = await User.findById(req.params.id)
@@ -59,17 +64,17 @@ export const followUser = async (req, res) => {
         await currentUser.updateOne({ $push: {following: req.params.id }})
         res.status(200).json("User followed!")
       } else {
-        res.status(403).json("You already follow this user")
+        return next(createError(403, 'You already follow this user'))
       }
     } catch (error) {
-      res.status(500).json(error)
+      next(error)
     }
   } else {
-    res.status(403).json("You can't follow yourself")
+    return next(createError(403, 'You cannot follow yourself'))
   }
 } 
 
-export const unfollowUser = async (req, res) => {
+export const unfollowUser = async (req, res, next) => {
   if (req.body.userId !== req.params.id) {
     try {
       const user = await User.findById(req.params.id)
@@ -79,12 +84,12 @@ export const unfollowUser = async (req, res) => {
         await currentUser.updateOne({ $pull: {following: req.params.id }})
         res.status(200).json("User unfollowed")
       } else {
-        res.status(403).json("You don't follow this user")
+        return next(createError(403, 'You do not follow this user'))
       }
     } catch (error) {
       res.status(500).json(error)
     }
   } else {
-    res.status(403).json("You can't unfollow yourself")
+    return next(createError(403, 'You cannot unfollow yourself'))
   }
 } 
