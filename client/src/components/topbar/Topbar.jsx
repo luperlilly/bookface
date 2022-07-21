@@ -12,7 +12,7 @@ const Topbar = () => {
       </div>
       <div className="topbar-center">
         <div className="searchbar">
-          <SearchIcon className='search-icon' />
+          <SearchIcon claqssName='search-icon' />
           <input placeholder='Search...' className='search-input' />
         </div>
       </div>
