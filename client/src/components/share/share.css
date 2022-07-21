@@ -75,3 +75,21 @@
   cursor: pointer;
   color: white;
 }
+
+.preview-image {
+  position: relative;
+}
+
+.preview-image > svg {
+  position: absolute;
+  right: 1rem;
+  top: 0.5rem;
+  cursor: pointer;
+}
+
+.preview-image > img {
+  width: 100%;
+  max-height: 20rem;
+  object-fit: cover;
+  border-radius: 0.5rem;
+}
