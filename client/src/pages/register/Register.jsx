@@ -3,10 +3,30 @@ import './register.css'
 
 const Register = () => {
   const [data, setData] = useState({ username: "", email: "", password: "", confirmpassword: "" })
+  const [passwordsMatch, setPasswordsMatch] = useState(true)
 
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value })
   }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    if (data.password !== data.confirmpassword) {
+      setPasswordsMatch(false)
+    }   
+  }
+
+  // const resetForm = () => {
+  //   setPasswordsMatch(true)
+  //   setData({
+  //     firstname: "", 
+  //     lastname: "", 
+  //     username: "", 
+  //     email: "", 
+  //     password: "", 
+  //     confirmpassword: "" 
+  //   })
+  // }
 
   return (
     <div className='login'>
@@ -18,14 +38,19 @@ const Register = () => {
           </span>
         </div>
         <div className="login-right">
-          <div className="login-box">
-            <input placeholder="Username" className="login-input" name='username' onChange={handleChange} />
-            <input type="email" placeholder="Email" className="login-input" name='email' onChange={handleChange} />
-            <input type="password" placeholder="Password" className="login-input" name='password' onChange={handleChange} />
-            <input type="password" placeholder="Confirm password" className="login-input" name='confirmpassword' onChange={handleChange} />
-            <button className="login-button">Sign up</button>
+          <form className="login-box" onSubmit={handleSubmit}>
+            <input placeholder="Username" className="login-input" name='username' onChange={handleChange} value={data.username} />
+            <input type="email" placeholder="Email" className="login-input" name='email' onChange={handleChange} value={data.email} />
+            <input type="password" placeholder="Password" className="login-input" name='password' onChange={handleChange} value={data.password} />
+            <input type="password" placeholder="Confirm password" className="login-input" name='confirmpassword' onChange={handleChange} value={data.confirmpassword} />
+
+            <span style={{ display: passwordsMatch ? "none" : "block", color: "red", fontSize: "12px", alignSelf: "flex-end", marginRight: "5px" }}>
+            * Passwords do not match
+            </span>
+
+            <button className="login-button" type="submit">Sign up</button>
             <button className="login-register-button">Already have an account?</button>
-          </div>
+          </form>
         </div>
       </div>
     </div>
