@@ -1,11 +1,21 @@
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { logIn } from '../../redux/actions/authAction'
 import './login.css'
 
 const Login = () => {
   const [data, setData] = useState({ email: "", password: "" })
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value })
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    dispatch(logIn(data))
   }
 
   return (
@@ -18,13 +28,13 @@ const Login = () => {
           </span>
         </div>
         <div className="login-right">
-          <div className="login-box">
+          <form className="login-box" onSubmit={handleSubmit}>
             <input type="email" placeholder="Email" className="login-input" name='email' onChange={handleChange} value={data.email} />
             <input type="password" placeholder="Password" className="login-input" name='password' onChange={handleChange} value={data.password} />
             <button className="login-button">Log in</button>
             <span className="login-forgot">Forgot password?</span>
-            <button className="login-register-button">Create a new account</button>
-          </div>
+            <button onClick={() => navigate('/register')} className="login-register-button">Create a new account</button>
+          </form>
         </div>
       </div>
     </div>

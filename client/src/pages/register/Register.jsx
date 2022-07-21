@@ -1,9 +1,15 @@
 import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { signUp } from '../../redux/actions/authAction'
 import './register.css'
 
 const Register = () => {
   const [data, setData] = useState({ username: "", email: "", password: "", confirmpassword: "" })
   const [passwordsMatch, setPasswordsMatch] = useState(true)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const loading = useSelector((state) => state.authReducer.loading)
 
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value })
@@ -11,9 +17,8 @@ const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (data.password !== data.confirmpassword) {
-      setPasswordsMatch(false)
-    }   
+    data.password === data.confirmpassword ? dispatch(signUp(data)) : setPasswordsMatch(false)
+    navigate('/')
   }
 
   // const resetForm = () => {
@@ -48,8 +53,8 @@ const Register = () => {
             * Passwords do not match
             </span>
 
-            <button className="login-button" type="submit">Sign up</button>
-            <button className="login-register-button">Already have an account?</button>
+            <button className="login-button" type="submit" disabled={loading}>{loading ? 'Loading...' : 'Sign up'}</button>
+            <button onClick={() => navigate('/login')} className="login-register-button">Already have an account?</button>
           </form>
         </div>
       </div>

@@ -15,7 +15,11 @@ export const registerUser = async (req, res, next) => {
     })
 
     const user = await newUser.save()
-    res.status(200).json(user)
+    const token = jwt.sign({ id: user._id }, process.env.JWT)
+    const { password, ...others } = user._doc
+    res.cookie('access_token', token, {
+      httpOnly: true
+    }).status(200).send(others)
   } catch (error) {
     next(error)
   }
@@ -27,7 +31,7 @@ export const loginUser = async (req, res, next) => {
     if (!user) return next(createError(404, 'User not found'))
 
     const validPassword = await bcrypt.compare(req.body.password, user.password)
-    if (!passwordCorrect) return next(createError(400, 'Wrong credentials'))
+    if (!validPassword) return next(createError(400, 'Wrong credentials'))
 
     const token = jwt.sign({ id: user._id }, process.env.JWT)
     const { password, ...others } = user._doc
