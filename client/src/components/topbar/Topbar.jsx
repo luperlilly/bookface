@@ -3,6 +3,7 @@ import SearchIcon from '@mui/icons-material/Search'
 import PersonIcon from '@mui/icons-material/Person'
 import ChatIcon from '@mui/icons-material/Chat'
 import NotificationsIcon from '@mui/icons-material/Notifications'
+import { Link } from 'react-router-dom'
 
 const Topbar = () => {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER
@@ -10,7 +11,9 @@ const Topbar = () => {
   return (
     <div className="topbar-container">
       <div className="topbar-left">
-        <span className="logo">Bookface</span>
+        <Link to='/' style={{ textDecoration:"none" }}>
+            <span className="logo">Bookface</span>
+        </Link>
       </div>
       <div className="topbar-center">
         <div className="searchbar">
@@ -20,7 +23,9 @@ const Topbar = () => {
       </div>
       <div className="topbar-right">
         <div className="topbar-links">
-          <span className="topbar-link">Homepage</span>
+          <Link to='/' style={{ textDecoration:"none", color: "inherit" }}>
+            <span className="topbar-link">Homepage</span>
+          </Link>
           <span className="topbar-link">Profile</span>
         </div>
         <div className="topbar-icons">
