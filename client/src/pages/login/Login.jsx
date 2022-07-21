@@ -1,6 +1,13 @@
+import { useState } from 'react'
 import './login.css'
 
 const Login = () => {
+  const [data, setData] = useState({ email: "", password: "" })
+
+  const handleChange = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value })
+  }
+
   return (
     <div className='login'>
       <div className="login-wrapper">
@@ -12,8 +19,8 @@ const Login = () => {
         </div>
         <div className="login-right">
           <div className="login-box">
-            <input type="email" placeholder="Email" className="login-input" />
-            <input type="password" placeholder="Password" className="login-input" />
+            <input type="email" placeholder="Email" className="login-input" name='email' onChange={handleChange} />
+            <input type="password" placeholder="Password" className="login-input" name='password' onChange={handleChange} />
             <button className="login-button">Log in</button>
             <span className="login-forgot">Forgot password?</span>
             <button className="login-register-button">Create a new account</button>
