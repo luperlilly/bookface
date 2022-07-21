@@ -31,7 +31,7 @@ const Login = () => {
           <form className="login-box" onSubmit={handleSubmit}>
             <input type="email" placeholder="Email" className="login-input" name='email' onChange={handleChange} value={data.email} />
             <input type="password" placeholder="Password" className="login-input" name='password' onChange={handleChange} value={data.password} />
-            <button className="login-button">Log in</button>
+            <button className="login-button" type="submit">Log in</button>
             <span className="login-forgot">Forgot password?</span>
             <button onClick={() => navigate('/register')} className="login-register-button">Create a new account</button>
           </form>

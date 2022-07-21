@@ -4,15 +4,23 @@ import PersonIcon from '@mui/icons-material/Person'
 import ChatIcon from '@mui/icons-material/Chat'
 import NotificationsIcon from '@mui/icons-material/Notifications'
 import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { logout } from "../../redux/actions/authAction"
 
 const Topbar = () => {
+  const dispatch = useDispatch()
   const PF = process.env.REACT_APP_PUBLIC_FOLDER
+
+  const handleLogout = () => {
+    dispatch(logout())
+  }
 
   return (
     <div className="topbar-container">
       <div className="topbar-left">
         <Link to='/' style={{ textDecoration:"none" }}>
             <span className="logo">Bookface</span>
+            <span className="logout" onClick={handleLogout}>Logout</span>
         </Link>
       </div>
       <div className="topbar-center">
