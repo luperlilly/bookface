@@ -6,7 +6,7 @@ import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions'
 import CancelIcon from '@mui/icons-material/Cancel'
 import { useDispatch, useSelector } from 'react-redux'
 import { useRef, useState } from 'react'
-import { uploadImage } from '../../redux/actions/uploadAction'
+import { uploadImage, uploadPost } from '../../redux/actions/uploadAction'
 
 const Share = () => {
   const user = useSelector((state) => state.authReducer.authData)
@@ -22,6 +22,11 @@ const Share = () => {
       setImage({image: URL.createObjectURL(img)})
       setImage(img)
     }    
+  }
+
+  const reset = () => {
+    setImage(null)
+    content.current.value = ""
   }
 
   const handleSubmit = (e) => {
@@ -46,6 +51,8 @@ const Share = () => {
         console.log(error)
       }
     }
+    dispatch(uploadPost(newPost))
+    reset()
   }
 
   const capitalise = (string) => {
