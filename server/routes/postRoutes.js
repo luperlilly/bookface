@@ -5,7 +5,7 @@ import { verifyToken } from '../verifyToken.js'
 const router = express.Router()
 
 // create post
-router.post('/', verifyToken, createPost)
+router.post('/', createPost)
 
 // update post
 router.put('/:id', verifyToken, updatePost)
