@@ -55,3 +55,21 @@
   margin: 0;
   list-style: none;
 }
+
+.leftbar-user {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.leftbar-user-image {
+  height: 50px;
+  width: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.leftbar-user-name {
+
+}

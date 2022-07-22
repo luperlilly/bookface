@@ -64,7 +64,7 @@ const Share = () => {
     <div className="share">
       <div className="share-wrapper">
         <div className="share-top">
-          <img className='share-profile-image' src={`${PF}default-profile.png`} alt="" />
+          <img className='share-profile-image' src={user.profilePicture ? PF + user.profilePicture : PF + 'default-profile.png'} alt="" />
           <input placeholder={`What's on your mind, ${capitalise(user.username)}?`} className='share-input' ref={content} required />
         </div>
         <hr className='share-hr' />
