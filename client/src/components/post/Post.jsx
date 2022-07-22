@@ -6,12 +6,13 @@ import { useSelector } from 'react-redux'
 import axios from 'axios'
 import TimeAgo from 'react-timeago'
 import { Link } from 'react-router-dom'
+import { likePost } from '../../redux/api/postRequest'
 
 const Post = ({ post }) => {
-  const [postUser, setPostUser] = useState({})
-  const [likes, setLikes] = useState(post.likes)
-  const [isLiked, setIsLiked] = useState(false)
   const user = useSelector((state) => state.authReducer.authData)
+  const [postUser, setPostUser] = useState({})
+  const [likes, setLikes] = useState(post.likes.length)
+  const [isLiked, setIsLiked] = useState(post.likes.includes(user._id))
   const PF = process.env.REACT_APP_PUBLIC_FOLDER
 
   useEffect(() => {
@@ -23,8 +24,9 @@ const Post = ({ post }) => {
   }, [post.userId])
 
   const likeHandler = () => {
-    setLikes(isLiked ? likes - 1 : likes + 1)
+    likePost(post._id, user._id)
     setIsLiked(!isLiked)
+    isLiked ? setLikes((prev) => prev - 1) : setLikes((prev) => prev + 1)
   }
 
   return (
@@ -50,7 +52,7 @@ const Post = ({ post }) => {
           <div className="post-bottom-left">
             <img className='like-icon' src={`${PF}like.png`} onClick={likeHandler} alt="" />
             <img className='like-icon' src={`${PF}heart.png`} onClick={likeHandler} alt="" />
-            <span className="post-like-counter">{post.likes}</span>
+            <span className="post-like-counter">{likes}</span>
           </div>
           <div className="post-bottom-right">
             <span className="post-comment-text">{post.comments} comments</span>
