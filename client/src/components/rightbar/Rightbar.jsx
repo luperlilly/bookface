@@ -1,8 +1,13 @@
 import './rightbar.css'
 import { Users } from "../../dummyData"
 import Online from '../online/Online'
+import { useSelector } from 'react-redux'
+import { useState } from 'react'
+import EditProfileModal from '../editProfileModal/EditProfileModal'
 
-const Rightbar = ({ profile }) => {
+const Rightbar = ({ profileUser }) => {
+  const user  = useSelector((state) => state.authReducer.authData)
+  const [modalOpened, setModalOpened] = useState(false)
   const PF = process.env.REACT_APP_PUBLIC_FOLDER
 
   const HomeRightbar = () => {
@@ -30,6 +35,8 @@ const Rightbar = ({ profile }) => {
     return(
       <>
         <h4 className='rightbar-title'>User information</h4>
+        {user._id === profileUser._id && <button className="edit-profile-button" onClick={() => setModalOpened(true)}>Edit profile</button>}
+        <EditProfileModal modalOpened={modalOpened} setModalOpened={setModalOpened} data={user} />
         <div className="rightbar-info">
           <div className="rightbar-info-item">
             <span className="rightbar-info-key">City:</span>
@@ -58,18 +65,6 @@ const Rightbar = ({ profile }) => {
             <img src={`${PF}default-profile.png`} alt="" className="rightbar-following-image" />
             <span className="rightbar-following-name">Rey McSriff</span>
           </div>
-          <div className="rightbar-following">
-            <img src={`${PF}default-profile.png`} alt="" className="rightbar-following-image" />
-            <span className="rightbar-following-name">Rey McSriff</span>
-          </div>
-          <div className="rightbar-following">
-            <img src={`${PF}default-profile.png`} alt="" className="rightbar-following-image" />
-            <span className="rightbar-following-name">Rey McSriff</span>
-          </div>
-          <div className="rightbar-following">
-            <img src={`${PF}default-profile.png`} alt="" className="rightbar-following-image" />
-            <span className="rightbar-following-name">Rey McSriff</span>
-          </div>
         </div>
       </>
     )
@@ -78,7 +73,7 @@ const Rightbar = ({ profile }) => {
   return (
     <div className='rightbar'>
       <div className="rightbar-wrapper">
-        { profile ? <ProfileRightbar /> : <HomeRightbar /> }
+        { profileUser ? <ProfileRightbar /> : <HomeRightbar /> }
       </div>
     </div>
   )
