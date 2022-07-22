@@ -26,7 +26,7 @@ const Feed = ({ feedUserId }) => {
       {loading 
         ? "Fetching posts..."
         : posts.map((post, id) => {
-        return <Post post={post} id={id} />
+        return <Post post={post} key={id} id={id} />
       })}
       </div>
     </div>

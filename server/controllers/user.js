@@ -3,7 +3,7 @@ import { createError } from "../error.js"
 import bcrypt from 'bcrypt'
 
 export const updateUser = async (req, res, next) => {
-  if (req.body.userId === req.params.id || req.body.isAdmin) {
+  if (req.body._id === req.params.id || req.body.isAdmin) {
     // if user tries to update password, generate a new one
     if (req.body.password) {
       try {

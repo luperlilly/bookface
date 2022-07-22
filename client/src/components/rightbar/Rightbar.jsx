@@ -36,7 +36,7 @@ const Rightbar = ({ profileUser }) => {
       <>
         <h4 className='rightbar-title'>User information</h4>
         {user._id === profileUser._id && <button className="edit-profile-button" onClick={() => setModalOpened(true)}>Edit profile</button>}
-        <EditProfileModal modalOpened={modalOpened} setModalOpened={setModalOpened} />
+        <EditProfileModal modalOpened={modalOpened} setModalOpened={setModalOpened} data={user} />
         <div className="rightbar-info">
           <div className="rightbar-info-item">
             <span className="rightbar-info-key">City:</span>
