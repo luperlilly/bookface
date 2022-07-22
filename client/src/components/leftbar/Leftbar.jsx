@@ -10,8 +10,23 @@ import EventIcon from '@mui/icons-material/Event'
 import SchoolIcon from '@mui/icons-material/School'
 import CloseFriend from '../closeFriend/CloseFriend'
 import { Users } from "../../dummyData"
+import { getAllUsers } from '../../redux/api/userRequest'
+import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 
 const Leftbar = () => {
+  const user = useSelector((state) => state.authReducer.authData)
+  const [users, setUsers] = useState([])
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      const { data } = await getAllUsers()
+      setUsers(data)
+    }
+    fetchUsers()
+  }, [])
+
   return (
     <div className='leftbar'>
       <div className='leftbar-wrapper'>
@@ -56,8 +71,11 @@ const Leftbar = () => {
         <button className="leftbar-button">Show more</button>
         <hr className='leftbar-hr' />
         <ul className="leftbar-friend-list">
-          {Users.map((u) => (
-              <CloseFriend key={u.id} user={u} />
+          {users.map((u) => (
+            <div className='leftbar-user'>
+              <img className='leftbar-user-image' src={u.profilePicture ? PF + u.profilePicture : PF + 'default-profile.png'} alt="" />
+              <span className="leftbar-user-name">{u.username}</span>
+            </div>
           ))}
         </ul>
       </div>

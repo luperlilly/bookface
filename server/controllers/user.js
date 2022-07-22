@@ -87,9 +87,18 @@ export const unfollowUser = async (req, res, next) => {
         return next(createError(403, 'You do not follow this user'))
       }
     } catch (error) {
-      res.status(500).json(error)
+      next(error)
     }
   } else {
     return next(createError(403, 'You cannot unfollow yourself'))
   }
 } 
+
+export const getAllUsers = async (req, res, next) => {
+  try {
+    const users = await User.find().limit(20)
+    res.status(200).json(users)
+  } catch (error) {
+    next(error)
+  }
+}
