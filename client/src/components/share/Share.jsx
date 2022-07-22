@@ -10,6 +10,7 @@ import { uploadImage, uploadPost } from '../../redux/actions/uploadAction'
 
 const Share = () => {
   const user = useSelector((state) => state.authReducer.authData)
+  const loading = useSelector((state) => state.postReducer.loading)
   const [image, setImage] = useState(null)
   const imageRef = useRef()
   const content = useRef()
@@ -86,8 +87,8 @@ const Share = () => {
               <span className='share-option-text'>Feelings</span>
             </div>
           </div>
-          <button className="share-button" onClick={handleSubmit}>
-            Share
+          <button className="share-button" onClick={handleSubmit} disabled={loading} >
+            { loading ? "Uploading..." : "Share" }
           </button>
           <div style={{display: "none"}}>
             <input type="file" name="myImage" ref={imageRef} onChange={onImageChange} />

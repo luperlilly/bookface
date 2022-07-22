@@ -8,18 +8,18 @@ const router = express.Router()
 router.post('/', createPost)
 
 // update post
-router.put('/:id', verifyToken, updatePost)
+router.put('/:id', updatePost)
 
 // delete post
-router.delete('/:id', verifyToken, deletePost)
+router.delete('/:id', deletePost)
 
 // like post
-router.put('/:id/like', verifyToken, likePost)
+router.put('/:id/like', likePost)
 
 // get post
 router.get('/:id', getPost)
 
 // get timeline posts
-router.get('/timeline/all', verifyToken, getTimelinePosts)
+router.get('/timeline/all', getTimelinePosts)
 
 export default router
