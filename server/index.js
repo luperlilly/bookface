@@ -39,6 +39,10 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
 app.use((err, req, res, next) => {
   const status = err.status || 500
   const message = err.message || "Something went wrong!"
+  const log = status >= 500 ? console.error : console.warn;
+
+  log(err);
+
   return res.status(status).json({
     success: false,
     status,
