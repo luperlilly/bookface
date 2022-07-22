@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import axios from 'axios'
 import TimeAgo from 'react-timeago'
+import { Link } from 'react-router-dom'
 
 const Post = ({ post }) => {
   const [postUser, setPostUser] = useState({})
@@ -31,7 +32,9 @@ const Post = ({ post }) => {
       <div className="post-wrapper">
         <div className="post-top">
           <div className="post-top-left">
+          <Link to={`/profile/${postUser._id}`}>
             <img className='post-profile-image' src={postUser.profilePicture ? PF + postUser.profilePicture : PF + 'default-profile.png'} alt="" />
+          </Link>
             <span className="post-username">{postUser.username}</span>
             <span className="post-date"><TimeAgo date={post.createdAt} /></span>
           </div>

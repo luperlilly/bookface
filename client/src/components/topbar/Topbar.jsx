@@ -3,12 +3,14 @@ import SearchIcon from '@mui/icons-material/Search'
 import PersonIcon from '@mui/icons-material/Person'
 import ChatIcon from '@mui/icons-material/Chat'
 import NotificationsIcon from '@mui/icons-material/Notifications'
-import { Link } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import { logout } from "../../redux/actions/authAction"
 
 const Topbar = () => {
+  const user  = useSelector((state) => state.authReducer.authData)
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const PF = process.env.REACT_APP_PUBLIC_FOLDER
 
   const handleLogout = () => {
@@ -34,7 +36,9 @@ const Topbar = () => {
           <Link to='/' style={{ textDecoration:"none", color: "inherit" }}>
             <span className="topbar-link">Homepage</span>
           </Link>
-          <span className="topbar-link">Profile</span>
+          <Link to={`/profile/${user._id}`} style={{ textDecoration:"none", color: "inherit" }}>
+            <span className="topbar-link">Profile</span>
+          </Link>
         </div>
         <div className="topbar-icons">
           <div className="topbar-icon-item">
@@ -56,7 +60,9 @@ const Topbar = () => {
             </span>
           </div>
         </div>
-        <img src={`${PF}default-profile.png`} alt="" className="topbar-image" />
+        <Link to={`/profile/${user.username}`}>
+        <img src={user.profilePicture ? PF + user.profilePicture : PF + 'default-profile.png'} alt="" className="topbar-image" />
+        </Link>
       </div>
     </div>
   )
