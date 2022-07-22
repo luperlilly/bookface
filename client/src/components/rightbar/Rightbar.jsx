@@ -9,12 +9,12 @@ const Rightbar = ({ profile }) => {
     return(
       <>
         <div className="birthday-container">
-          <img className="birthday-image" src="assets/gift.png" alt="" />
+          <img className="birthday-image" src={PF + 'gift.png'} alt="" />
           <span className="birthday-text">
             <b>Rey McSriff</b> and <b>3 other friends</b> have a birthday today.
           </span>
         </div>
-        <img className="rightbar-ad" src="assets/ad.jpeg" alt="" />
+        <img className="rightbar-ad" src={PF + 'ad.jpeg'} alt="" />
         <h4 className="rightbar-title">Online friends</h4>
         <ul className="rightbar-friend-list">
           {Users.map((u) => (
