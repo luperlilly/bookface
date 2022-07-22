@@ -13,9 +13,15 @@ import uploadRoute from './routes/uploadRoute.js'
 
 const app = express()
 
+// allow access to public/images folder in server side
+app.use(express.static('public'))
+app.use('/images', express.static("images"))
+
 app.use(cookieParser())
 app.use(express.json())
-app.use(helmet())
+app.use(helmet({
+  crossOriginResourcePolicy: false,
+}))
 app.use(morgan("dev")) // was getting deprecation warning due to import syntax, adding "dev" stops this
 app.use(bodyParser.json({ limit: '30mb', extended: true }))
 app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }))

@@ -70,7 +70,7 @@ export const getPost = async (req, res, next) => {
 
 export const getTimelinePosts = async (req, res, next) => {
   try {
-    const currentUser = await User.findById(req.body.userId)
+    const currentUser = await User.findById(req.params.id)
     const userPosts = await Post.find({ userId: currentUser._id })
     const friendPosts = await Promise.all(
       currentUser.following.map((friendId) => {

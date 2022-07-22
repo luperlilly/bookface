@@ -43,7 +43,7 @@ const Share = () => {
       const fileName = Date.now() + image.name
       data.append("name", fileName)
       data.append("file", image)
-      newPost.image = fileName
+      newPost.img = fileName
       console.log(newPost)
 
       try {

@@ -20,6 +20,6 @@ router.put('/:id/like', likePost)
 router.get('/:id', getPost)
 
 // get timeline posts
-router.get('/timeline/all', getTimelinePosts)
+router.get('/:id/timeline', getTimelinePosts)
 
 export default router
