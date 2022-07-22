@@ -40,15 +40,15 @@ const Rightbar = ({ profileUser }) => {
         <div className="rightbar-info">
           <div className="rightbar-info-item">
             <span className="rightbar-info-key">City:</span>
-            <span className="rightbar-info-value">London</span>
+            <span className="rightbar-info-value">{profileUser.city}</span>
           </div>
           <div className="rightbar-info-item">
             <span className="rightbar-info-key">From:</span>
-            <span className="rightbar-info-value">London</span>
+            <span className="rightbar-info-value">{profileUser.from}</span>
           </div>
           <div className="rightbar-info-item">
             <span className="rightbar-info-key">Relationship:</span>
-            <span className="rightbar-info-value">Single</span>
+            <span className="rightbar-info-value">{profileUser.relationship}</span>
           </div>
         </div>
         <h4 className='rightbar-title'>User friends</h4>
