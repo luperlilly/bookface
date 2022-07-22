@@ -22,7 +22,7 @@ const Feed = () => {
   return (
     <div className='feed'>
       <div className="feed-wrapper">
-        <Share />
+        {user._id === params.id && <Share />}
       {loading 
         ? "Fetching posts..."
         : posts.map((post, id) => {
