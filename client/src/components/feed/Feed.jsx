@@ -6,7 +6,7 @@ import { useEffect } from 'react'
 import { getTimelinePosts } from '../../redux/actions/postAction'
 import { useParams } from 'react-router-dom'
 
-const Feed = () => {
+const Feed = ({ feedUserId }) => {
   const dispatch = useDispatch()
   const user  = useSelector((state) => state.authReducer.authData)
   let { posts, loading } = useSelector((state) => state.postReducer)
@@ -22,7 +22,7 @@ const Feed = () => {
   return (
     <div className='feed'>
       <div className="feed-wrapper">
-        {user._id === params.id && <Share />}
+        {(!feedUserId || user._id === params.id) && <Share />}
       {loading 
         ? "Fetching posts..."
         : posts.map((post, id) => {

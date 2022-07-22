@@ -22,6 +22,7 @@ const Profile = () => {
     fetchUser()
   }, [userId])
 
+  // pass prop to feed as 'feedUserId' instead of 'userId' to avoid potential naming conflicts
   return (
     <>
       <Topbar />
@@ -39,8 +40,8 @@ const Profile = () => {
             </div>
           </div>
           <div className="profile-right-bottom">
-            <Feed />
-            <Rightbar />
+            <Feed feedUserId={userId} />
+            <Rightbar profileUser={profileUser} />
           </div>
         </div>
       </div>
