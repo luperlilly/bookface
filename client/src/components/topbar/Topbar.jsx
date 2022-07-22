@@ -60,7 +60,7 @@ const Topbar = () => {
             </span>
           </div>
         </div>
-        <Link to={`/profile/${user.username}`}>
+        <Link to={`/profile/${user._id}`}>
         <img src={user.profilePicture ? PF + user.profilePicture : PF + 'default-profile.png'} alt="" className="topbar-image" />
         </Link>
       </div>
