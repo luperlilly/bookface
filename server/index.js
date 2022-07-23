@@ -10,6 +10,7 @@ import userRoutes from './routes/userRoutes.js'
 import authRoutes from './routes/authRoutes.js'
 import postRoutes from './routes/postRoutes.js'
 import uploadRoute from './routes/uploadRoute.js'
+import { generatePrivateKey } from './auth.js'
 
 const app = express()
 
@@ -65,6 +66,8 @@ app.use((err, req, res, next) => {
 })
 
 const port = process.env.PORT || 8000
+
+generatePrivateKey()
 
 const run = async () => {
   await dbConnect()
