@@ -13,6 +13,7 @@ import { Users } from "../../dummyData"
 import { getAllUsers } from '../../redux/api/userRequest'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
+import User from '../user/User'
 
 const Leftbar = () => {
   const user = useSelector((state) => state.authReducer.authData)
@@ -70,12 +71,10 @@ const Leftbar = () => {
         </ul>
         <button className="leftbar-button">Show more</button>
         <hr className='leftbar-hr' />
+        <span className='leftbar-suggestions'>People you may know...</span>
         <ul className="leftbar-friend-list">
-          {users.map((u) => (
-            <div className='leftbar-user'>
-              <img className='leftbar-user-image' src={u.profilePicture ? PF + u.profilePicture : PF + 'default-profile.png'} alt="" />
-              <span className="leftbar-user-name">{u.username}</span>
-            </div>
+          {users.filter((u) => u._id !== user._id).map((u) => (
+            <User key={u.id} person={u} />
           ))}
         </ul>
       </div>

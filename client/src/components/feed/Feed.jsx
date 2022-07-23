@@ -17,6 +17,7 @@ const Feed = ({ feedUserId }) => {
   }, [dispatch, user._id])
 
   if (!posts) return "Nothing to see here"
+  posts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
   if (params.id) posts = posts.filter((post) => post.userId === params.id)
 
   return (
