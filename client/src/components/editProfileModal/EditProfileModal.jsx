@@ -77,6 +77,10 @@ const EditProfileModal = ({ modalOpened, setModalOpened, data }) => {
         </div>
 
         <div>
+          <input type="text" className="info-input" name="description" placeholder="About yourself" onChange={handleChange} value={formData.description} />
+        </div>
+
+        <div>
           <input type="text" className="info-input" name="city" placeholder="City" onChange={handleChange} value={formData.city} />
         </div>
 
