@@ -1,5 +1,5 @@
 .leftbar {
-  flex: 3;
+  flex: 2;
   height: calc(100vh - 50px);
   overflow-y: scroll;
   position: sticky;
@@ -50,26 +50,13 @@
   margin: 20px 0;
 }
 
+.leftbar-suggestions {
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
 .leftbar-friend-list {
   padding: 0;
-  margin: 0;
+  margin-top: 20px;
   list-style: none;
-}
-
-.leftbar-user {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 20px;
-  cursor: pointer;
-}
-
-.leftbar-user-image {
-  height: 50px;
-  width: 50px;
-  object-fit: cover;
-  border-radius: 50%;
-}
-
-.leftbar-user-name {
-
 }
