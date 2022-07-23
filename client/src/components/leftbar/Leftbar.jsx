@@ -74,7 +74,7 @@ const Leftbar = () => {
         <span className='leftbar-suggestions'>People you may know...</span>
         <ul className="leftbar-friend-list">
           {users.filter((u) => u._id !== user._id).map((u) => (
-            <User key={u.id} person={u} />
+            <User key={u._id} person={u} />
           ))}
         </ul>
       </div>
