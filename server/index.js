@@ -25,7 +25,9 @@ app.use(helmet({
 app.use(morgan("dev")) // was getting deprecation warning due to import syntax, adding "dev" stops this
 app.use(bodyParser.json({ limit: '30mb', extended: true }))
 app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }))
-app.use(cors())
+app.use(cors({
+  origin: 'http://localhost:3000',
+}))
 
 app.use('/api/auth', authRoutes)
 app.use('/api/users', userRoutes)
