@@ -32,13 +32,28 @@ app.use('/api/users', userRoutes)
 app.use('/api/posts', postRoutes)
 app.use('/api/upload', uploadRoute)
 
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true }, () => {
-  console.log("Connected to database")
+const dbConnect = async () => new Promise((resolve) => {
+  mongoose.connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    serverSelectionTimeoutMS: 10000,
+  }, (err) => {
+    if (err) {
+      throw err
+    }
+
+    console.log(`🛢[database]: Connected to database at ${process.env.MONGO_URI}`)
+    resolve()
+  })
 })
 
 app.use((err, req, res, next) => {
   const status = err.status || 500
   const message = err.message || "Something went wrong!"
+  const log = status >= 500 ? console.error : console.warn;
+
+  log(err);
+
   return res.status(status).json({
     success: false,
     status,
@@ -46,8 +61,14 @@ app.use((err, req, res, next) => {
   })
 })
 
-const port = process.env.PORT || 8800
+const port = process.env.PORT || 8000
 
-app.listen(port, () => {
-  console.log(`⚡️[server]: Server is running at https://localhost:${port}`)
-})
+const run = async () => {
+  await dbConnect()
+
+  app.listen(port, () => {
+    console.log(`⚡️[server]: Server is running at http://localhost:${port}`)
+  })
+}
+
+run()

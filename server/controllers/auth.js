@@ -2,6 +2,7 @@ import User from '../models/User.js'
 import { createError } from "../error.js"
 import bcrypt from 'bcrypt'
 import jwt from "jsonwebtoken"
+import { getPrivateKey } from '../auth.js'
 
 export const registerUser = async (req, res, next) => {
   try {
@@ -15,7 +16,7 @@ export const registerUser = async (req, res, next) => {
     })
 
     const user = await newUser.save()
-    const token = jwt.sign({ id: user._id }, process.env.JWT)
+    const token = jwt.sign({ id: user._id }, getPrivateKey())
     const { password, ...others } = user._doc
     res.cookie('access_token', token, {
       httpOnly: true
@@ -33,11 +34,11 @@ export const loginUser = async (req, res, next) => {
     const validPassword = await bcrypt.compare(req.body.password, user.password)
     if (!validPassword) return next(createError(400, 'Wrong credentials'))
 
-    const token = jwt.sign({ id: user._id }, process.env.JWT)
+    const token = jwt.sign({ id: user._id }, getPrivateKey())
     const { password, ...others } = user._doc
     res.cookie('access_token', token, {
       httpOnly: true
-    }).status(200).send(others) 
+    }).status(200).send(others)
   } catch (error) {
     next(error)
   }
