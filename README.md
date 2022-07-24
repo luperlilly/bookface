@@ -37,3 +37,13 @@ Run `npm install` from both the `./server` and `./client` directories.
 Launch MongoDB with `mongod`.
 
 Run `npm run dev` from the `./server` directory.
+
+## Technologies Used
+
+* React.js
+* Node.js
+* Express.js
+* MongoDB
+* JSON Web Token
+* Thunder Client
+* Material UI/Icons
