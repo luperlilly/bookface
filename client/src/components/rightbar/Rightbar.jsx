@@ -6,21 +6,20 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useState } from 'react'
 import EditProfileModal from '../editProfileModal/EditProfileModal'
 import AddIcon from '@mui/icons-material/Add'
-import RemoveIcon from '@mui/icons-material/Remove' 
+import RemoveIcon from '@mui/icons-material/Remove'
 
 const Rightbar = ({ profileUser }) => {
   const user = useSelector((state) => state.authReducer.authData)
-  const [following, setFollowing] = useState(false)
   const [modalOpened, setModalOpened] = useState(false)
   const dispatch = useDispatch()
   const PF = process.env.REACT_APP_PUBLIC_FOLDER
 
+  const following = profileUser && user.following.includes(profileUser._id)
+
   const handleFollow = () => {
-    following ? 
+    following ?
     dispatch(unfollowUser(profileUser._id, user))
     : dispatch(followUser(profileUser._id, user))
-
-    setFollowing(!following)
   }
 
   const HomeRightbar = () => {
@@ -44,13 +43,13 @@ const Rightbar = ({ profileUser }) => {
   }
 
   const ProfileRightbar = () => {
-    
+
     return(
       <>
         { user._id !== profileUser._id && (
             <button className="rightbar-follow-button" onClick={handleFollow}>
-              { following || profileUser.followers?.includes(user._id) ? 'Unfollow' : 'Follow' }
-              { following || profileUser.followers?.includes(user._id) ? <RemoveIcon /> : <AddIcon /> }
+              { following ? 'Unfollow' : 'Follow' }
+              { following ? <RemoveIcon /> : <AddIcon /> }
             </button>
         )}
         <h4 className='rightbar-title'>User information</h4>
@@ -98,4 +97,4 @@ const Rightbar = ({ profileUser }) => {
   )
 }
 
-export default Rightbar 
+export default Rightbar
