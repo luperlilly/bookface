@@ -1,5 +1,4 @@
 import './rightbar.css'
-import { Users } from "../../dummyData"
 import Online from '../online/Online'
 import { followUser, unfollowUser } from '../../redux/actions/userAction'
 import { useDispatch, useSelector } from 'react-redux'
@@ -34,7 +33,7 @@ const Rightbar = ({ profileUser }) => {
         <img className="rightbar-ad" src={PF + 'ad.jpeg'} alt="" />
         <h4 className="rightbar-title">Online friends</h4>
         <ul className="rightbar-friend-list">
-          {Users.map((u) => (
+          {user.following.map((u) => (
             <Online key={u.id} user={u} />
           ))}
         </ul>
