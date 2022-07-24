@@ -1,5 +1,5 @@
 import express from "express"
-import { deleteUser, followUser, getAllUsers, getUser, unfollowUser, updateUser } from '../controllers/user.js'
+import { deleteUser, followUser, getAllUserFriends, getAllUsers, getUser, unfollowUser, updateUser } from '../controllers/user.js'
 import { verifyToken } from '../verifyToken.js'
 
 const router = express.Router()
@@ -21,5 +21,8 @@ router.put('/:id/unfollow', verifyToken, unfollowUser)
 
 // get all users
 router.get('/', getAllUsers)
+
+// get all user's friends
+router.get('/:id/friends', getAllUserFriends)
 
 export default router;

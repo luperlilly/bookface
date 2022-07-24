@@ -123,3 +123,17 @@ export const getAllUsers = async (req, res, next) => {
     next(error)
   }
 }
+
+export const getAllUserFriends = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.params.id)
+    const userFriends = await Promise.all(
+      user.following.map((friendId) => {
+        return User.findById(friendId)
+      })
+    )
+    res.status(200).json(userFriends)
+  } catch (error) {
+    next(error)
+  }
+}
