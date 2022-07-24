@@ -5,21 +5,21 @@ import { verifyToken } from '../verifyToken.js'
 const router = express.Router()
 
 // create post
-router.post('/', createPost)
+router.post('/', verifyToken, createPost)
 
 // update post
-router.put('/:id', updatePost)
+router.put('/:id', verifyToken, updatePost)
 
 // delete post
-router.delete('/:id', deletePost)
+router.delete('/:id', verifyToken, deletePost)
 
 // like post
-router.put('/:id/like', likePost)
+router.put('/:id/like', verifyToken, likePost)
 
 // get post
 router.get('/:id', getPost)
 
 // get timeline posts
-router.get('/:id/timeline', getTimelinePosts)
+router.get('/:id/timeline', verifyToken, getTimelinePosts)
 
 export default router

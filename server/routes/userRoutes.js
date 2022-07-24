@@ -5,19 +5,19 @@ import { verifyToken } from '../verifyToken.js'
 const router = express.Router()
 
 // update user
-router.put('/:id', updateUser)
+router.put('/:id', verifyToken, updateUser)
 
 // delete user
-router.delete('/:id', deleteUser) 
+router.delete('/:id', verifyToken, deleteUser) 
 
 // get a user
 router.get('/:id', getUser)
 
 // follow user
-router.put('/:id/follow', followUser)
+router.put('/:id/follow', verifyToken, followUser)
 
 // unfollow user
-router.put('/:id/unfollow', unfollowUser)
+router.put('/:id/unfollow', verifyToken, unfollowUser)
 
 // get all users
 router.get('/', getAllUsers)
