@@ -1,7 +1,5 @@
-import axios from 'axios'
+import { API } from './client'
 
-const API = axios.create({ baseURL: "http://localhost:8000/api" })
-
-export const uploadImage = (data) => API.post('/upload', data) 
+export const uploadImage = (data) => API.post('/upload', data)
 
 export const uploadPost = (data) => API.post("/posts", data)

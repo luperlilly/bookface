@@ -10,6 +10,7 @@ import userRoutes from './routes/userRoutes.js'
 import authRoutes from './routes/authRoutes.js'
 import postRoutes from './routes/postRoutes.js'
 import uploadRoute from './routes/uploadRoute.js'
+import { generatePrivateKey } from './auth.js'
 
 const app = express()
 
@@ -25,7 +26,10 @@ app.use(helmet({
 app.use(morgan("dev")) // was getting deprecation warning due to import syntax, adding "dev" stops this
 app.use(bodyParser.json({ limit: '30mb', extended: true }))
 app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }))
-app.use(cors())
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credentials: true,
+}))
 
 app.use('/api/auth', authRoutes)
 app.use('/api/users', userRoutes)
@@ -62,6 +66,8 @@ app.use((err, req, res, next) => {
 })
 
 const port = process.env.PORT || 8000
+
+generatePrivateKey()
 
 const run = async () => {
   await dbConnect()
