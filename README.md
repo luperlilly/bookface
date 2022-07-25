@@ -6,6 +6,8 @@ Users can create an account, sign in, post, follow/unfollow other users, like/un
 
 A user's profile displays only their posts, while the feed on their homepage displays posts from themselves and all the people they follow. They are unable to see the posts of users they don't follow, but they can visit their profile page to follow them.
 
+<img width="1440" alt="bookface" src="https://user-images.githubusercontent.com/97295867/180749433-ce8919c6-ef14-4677-a6d9-cab26ab566f7.png">
+
 ---
 
 ## Database setup
