@@ -4,6 +4,8 @@ This is a Facebook clone built using the MERN stack. It has a React frontend, a 
 
 Users can create an account, sign in, post, follow/unfollow other users, like/unlike each others' posts, update their profile/cover pictures and display personal information on their profiles.
 
+A user's profile displays only their posts, while the feed on their homepage displays posts from themselves and all the people they follow. They are unable to see the posts of users they don't follow, but they can visit their profile page to follow them.
+
 ---
 
 ## Database setup
