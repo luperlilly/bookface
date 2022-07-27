@@ -10,7 +10,13 @@ A user's profile displays only their posts, while the feed on their homepage dis
 
 ---
 
-## Database setup
+## Video Demo
+
+https://user-images.githubusercontent.com/97295867/181212693-923c1ccd-12d1-400f-92ca-e00105304de7.mp4
+
+---
+
+## Database Setup
 
 Install MongoDB. If you are using a Mac you can do this via [Homebrew](https://brew.sh/):
 
