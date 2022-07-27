@@ -12,7 +12,7 @@ A user's profile displays only their posts, while the feed on their homepage dis
 
 ## Video Demo
 
-https://user-images.githubusercontent.com/97295867/181213621-1a8fe13b-3f41-4e31-bd21-406bb545de40.mp4
+https://user-images.githubusercontent.com/97295867/181215897-4c97ac67-6ee0-4697-bd8b-74797cf7eeca.mp4
 
 ---
 
