@@ -32,7 +32,7 @@ export const deletePost = async (req, res, next) => {
   try {
     const post = await Post.findById(req.params.id)
 
-    if (post.userId === req.body.userId) {
+    if (post.userId === req.user.id) {
       await post.deleteOne()
       res.status(200).json("Post deleted")
     } else {

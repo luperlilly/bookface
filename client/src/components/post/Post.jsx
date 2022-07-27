@@ -1,12 +1,11 @@
 import './post.css'
-import { Users } from '../../dummyData'
-import MoreVertIcon from '@mui/icons-material/MoreVert'
+import CancelIcon from '@mui/icons-material/Cancel';
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import axios from 'axios'
 import TimeAgo from 'react-timeago'
 import { Link } from 'react-router-dom'
-import { likePost } from '../../redux/api/postRequest'
+import { likePost, deletePost } from '../../redux/api/postRequest'
 
 const Post = ({ post }) => {
   const user = useSelector((state) => state.authReducer.authData)
@@ -29,6 +28,11 @@ const Post = ({ post }) => {
     isLiked ? setLikes((prev) => prev - 1) : setLikes((prev) => prev + 1)
   }
 
+  const handleDelete = () => {
+    deletePost(post._id)
+    window.location.reload()
+  }
+
   return (
     <div className="post">
       <div className="post-wrapper">
@@ -41,7 +45,7 @@ const Post = ({ post }) => {
             <span className="post-date"><TimeAgo date={post.createdAt} /></span>
           </div>
           <div className="post-top-right">
-            <MoreVertIcon />
+            {post.userId === user._id && <CancelIcon onClick={handleDelete} style={{ cursor: "pointer" }} />}
           </div>
         </div>
         <div className="post-center">
