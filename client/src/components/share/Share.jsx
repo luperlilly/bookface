@@ -15,7 +15,7 @@ const Share = () => {
   const imageRef = useRef()
   const content = useRef()
   const dispatch = useDispatch()
-  const PF = process.env.REACT_APP_PUBLIC_FOLDER
+  const PF = '/images/'
 
   const onImageChange = (e) => {
     if (e.target.files && e.target.files[0]) {

@@ -10,7 +10,7 @@ import { logout } from "../../redux/actions/authAction"
 const Topbar = () => {
   const user  = useSelector((state) => state.authReducer.authData)
   const dispatch = useDispatch()
-  const PF = process.env.REACT_APP_PUBLIC_FOLDER
+  const PF = '/images/'
 
   const handleLogout = () => {
     dispatch(logout())

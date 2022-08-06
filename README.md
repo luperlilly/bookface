@@ -1,5 +1,6 @@
 # Bookface
-
+ 
+ 
 This is a Facebook clone built using the MERN stack. It has a React frontend, a Node/Express backend and a MongoDB database storing data for users and posts, with Redux state management.
 
 Users can create an account, sign in, post, delete their own posts, follow/unfollow other users, like/unlike each others' posts, update their profile/cover pictures and display personal information on their profiles.

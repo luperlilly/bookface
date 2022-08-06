@@ -14,7 +14,7 @@ const Post = ({ post }) => {
   const dispatch = useDispatch();
   const [likes, setLikes] = useState(post.likes.length);
   const [isLiked, setIsLiked] = useState(post.likes.includes(user._id));
-  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+  const PF = '/images/';
 
   useEffect(() => {
     const fetchUser = async () => {

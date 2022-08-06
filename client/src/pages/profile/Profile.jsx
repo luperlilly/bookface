@@ -14,7 +14,7 @@ const Profile = () => {
   const profileUserId = useParams().id
   const isCurrentUser = profileUserId === currentUser._id
   const user = isCurrentUser ? currentUser : profileUser
-  const PF = process.env.REACT_APP_PUBLIC_FOLDER
+  const PF = '/images/'
 
   useEffect(() => {
     if (profileUserId === currentUser._id) {

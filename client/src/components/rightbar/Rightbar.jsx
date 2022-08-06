@@ -15,7 +15,7 @@ const Rightbar = ({ profileUser }) => {
   const [profileUserFriends, setProfileUserFriends] = useState([])
   const dispatch = useDispatch()
   const params = useParams()
-  const PF = process.env.REACT_APP_PUBLIC_FOLDER
+  const PF = '/images/'
 
   const following = profileUser && user.following.includes(params.id)
 

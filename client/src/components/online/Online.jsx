@@ -4,7 +4,7 @@ import axios from 'axios'
 
 const Online = ({ user }) => {
   const [onlineUser, setOnlineUser] = useState({})
-  const PF = process.env.REACT_APP_PUBLIC_FOLDER
+  const PF = '/images/'
 
   useEffect(() => {
     const fetchOnlineUser = async () => {

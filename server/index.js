@@ -5,6 +5,7 @@ import morgan from 'morgan'
 import bodyParser from "body-parser"
 import cookieParser from 'cookie-parser'
 import cors from "cors"
+import path from "path"
 import 'dotenv/config'
 import userRoutes from './routes/userRoutes.js'
 import authRoutes from './routes/authRoutes.js'
@@ -13,6 +14,7 @@ import uploadRoute from './routes/uploadRoute.js'
 import { generatePrivateKey } from './auth.js'
 
 const app = express()
+
 
 // allow access to public/images folder in server side
 app.use(express.static('public'))
@@ -23,7 +25,7 @@ app.use(express.json())
 app.use(helmet({
   crossOriginResourcePolicy: false,
 }))
-app.use(morgan("dev")) // was getting deprecation warning due to import syntax, adding "dev" stops this
+//app.use(morgan("dev")) // was getting deprecation warning due to import syntax, adding "dev" stops this
 app.use(bodyParser.json({ limit: '30mb', extended: true }))
 app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }))
 app.use(cors({
@@ -50,6 +52,20 @@ const dbConnect = async () => new Promise((resolve) => {
     resolve()
   })
 })
+
+const __dirname = path.resolve()
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '/client/build')))
+
+  app.get('*', (req, res) =>
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+  )
+} else {
+  app.get('/', (req, res) => {
+    res.send('API is running....')
+  })
+}
 
 app.use((err, req, res, next) => {
   const status = err.status || 500
